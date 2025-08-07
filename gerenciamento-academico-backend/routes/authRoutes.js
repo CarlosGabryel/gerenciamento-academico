@@ -40,7 +40,7 @@ router.post('/login', async (req, res) => {
 
   try {
     // Verificar se o usuário existe
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password'); // Seleciona o campo de senha para comparação
     if (!user) {
       return res.status(400).json({ message: 'Email ou senha inválidos' });
     }
